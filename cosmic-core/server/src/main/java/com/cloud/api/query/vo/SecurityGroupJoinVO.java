@@ -1,20 +1,8 @@
-// Licensed to the Apache Software Foundation (ASF) under one
-// or more contributor license agreements.  See the NOTICE file
-// distributed with this work for additional information
-// regarding copyright ownership.  The ASF licenses this file
-// to you under the Apache License, Version 2.0 (the
-// "License"); you may not use this file except in compliance
-// with the License.  You may obtain a copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing,
-// software distributed under the License is distributed on an
-// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-// KIND, either express or implied.  See the License for the
-// specific language governing permissions and limitations
-// under the License.
 package com.cloud.api.query.vo;
+
+import com.cloud.network.security.SecurityGroup;
+import com.cloud.network.security.SecurityRule.SecurityRuleType;
+import com.cloud.server.ResourceTag.ResourceObjectType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,10 +10,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import com.cloud.network.security.SecurityGroup;
-import com.cloud.network.security.SecurityRule.SecurityRuleType;
-import com.cloud.server.ResourceTag.ResourceObjectType;
 
 @Entity
 @Table(name = "security_group_view")
@@ -51,7 +35,7 @@ public class SecurityGroupJoinVO extends BaseViewVO implements ControlledViewEnt
     private String accountUuid;
 
     @Column(name = "account_name")
-    private String accountName = null;
+    private final String accountName = null;
 
     @Column(name = "account_type")
     private short accountType;
@@ -63,10 +47,10 @@ public class SecurityGroupJoinVO extends BaseViewVO implements ControlledViewEnt
     private String domainUuid;
 
     @Column(name = "domain_name")
-    private String domainName = null;
+    private final String domainName = null;
 
     @Column(name = "domain_path")
-    private String domainPath = null;
+    private final String domainPath = null;
 
     @Column(name = "project_id")
     private long projectId;
@@ -105,10 +89,10 @@ public class SecurityGroupJoinVO extends BaseViewVO implements ControlledViewEnt
     private String ruleType;
 
     @Column(name = "rule_allowed_network_id")
-    private Long ruleAllowedNetworkId = null;
+    private final Long ruleAllowedNetworkId = null;
 
     @Column(name = "rule_allowed_ip_cidr")
-    private String ruleAllowedSourceIpCidr = null;
+    private final String ruleAllowedSourceIpCidr = null;
 
     @Column(name = "tag_id")
     private long tagId;
@@ -164,13 +148,13 @@ public class SecurityGroupJoinVO extends BaseViewVO implements ControlledViewEnt
     }
 
     @Override
-    public String getAccountUuid() {
-        return accountUuid;
+    public long getDomainId() {
+        return domainId;
     }
 
     @Override
-    public String getAccountName() {
-        return accountName;
+    public String getDomainPath() {
+        return domainPath;
     }
 
     @Override
@@ -179,8 +163,13 @@ public class SecurityGroupJoinVO extends BaseViewVO implements ControlledViewEnt
     }
 
     @Override
-    public long getDomainId() {
-        return domainId;
+    public String getAccountUuid() {
+        return accountUuid;
+    }
+
+    @Override
+    public String getAccountName() {
+        return accountName;
     }
 
     @Override
@@ -194,15 +183,6 @@ public class SecurityGroupJoinVO extends BaseViewVO implements ControlledViewEnt
     }
 
     @Override
-    public String getDomainPath() {
-        return domainPath;
-    }
-
-    public long getProjectId() {
-        return projectId;
-    }
-
-    @Override
     public String getProjectUuid() {
         return projectUuid;
     }
@@ -210,6 +190,10 @@ public class SecurityGroupJoinVO extends BaseViewVO implements ControlledViewEnt
     @Override
     public String getProjectName() {
         return projectName;
+    }
+
+    public long getProjectId() {
+        return projectId;
     }
 
     public Long getJobId() {

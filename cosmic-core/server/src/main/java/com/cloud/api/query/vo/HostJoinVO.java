@@ -1,22 +1,13 @@
-// Licensed to the Apache Software Foundation (ASF) under one
-// or more contributor license agreements.  See the NOTICE file
-// distributed with this work for additional information
-// regarding copyright ownership.  The ASF licenses this file
-// to you under the Apache License, Version 2.0 (the
-// "License"); you may not use this file except in compliance
-// with the License.  You may obtain a copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing,
-// software distributed under the License is distributed on an
-// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-// KIND, either express or implied.  See the License for the
-// specific language governing permissions and limitations
-// under the License.
 package com.cloud.api.query.vo;
 
-import java.util.Date;
+import com.cloud.host.Host.Type;
+import com.cloud.host.Status;
+import com.cloud.hypervisor.Hypervisor.HypervisorType;
+import com.cloud.org.Cluster;
+import com.cloud.resource.ResourceState;
+import com.cloud.utils.db.GenericDao;
+import org.apache.cloudstack.api.Identity;
+import org.apache.cloudstack.api.InternalIdentity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,103 +17,69 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import com.cloud.host.Host.Type;
-import com.cloud.host.Status;
-import com.cloud.hypervisor.Hypervisor.HypervisorType;
-import com.cloud.org.Cluster;
-import com.cloud.resource.ResourceState;
-import com.cloud.utils.db.GenericDao;
-
-import org.apache.cloudstack.api.Identity;
-import org.apache.cloudstack.api.InternalIdentity;
+import java.util.Date;
 
 /**
  * Host DB view.
- *
  */
 @Entity
 @Table(name = "host_view")
 public class HostJoinVO extends BaseViewVO implements InternalIdentity, Identity {
 
-    @Id
-    @Column(name = "id")
-    private long id;
-
-    @Column(name = "uuid")
-    private String uuid;
-
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "status")
-    private Status status = null;
-
-    @Column(name = "type")
-    @Enumerated(value = EnumType.STRING)
-    private Type type;
-
-    @Column(name = "private_ip_address")
-    private String privateIpAddress;
-
-    @Column(name = "disconnected")
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date disconnectedOn;
-
-    @Column(name = "version")
-    private String version;
-
-    @Column(name = "hypervisor_type")
-    @Enumerated(value = EnumType.STRING)
-    private HypervisorType hypervisorType;
-
-    @Column(name = "hypervisor_version")
-    private String hypervisorVersion;
-
-    @Column(name = "capabilities")
-    private String caps;
-
-    @Column(name = "last_ping")
-    private long lastPinged;
-
-    @Column(name = GenericDao.CREATED_COLUMN)
-    private Date created;
-
-    @Column(name = GenericDao.REMOVED_COLUMN)
-    private Date removed;
-
-    @Column(name = "resource_state")
-    @Enumerated(value = EnumType.STRING)
-    private ResourceState resourceState;
-
-    @Column(name = "mgmt_server_id")
-    private Long managementServerId;
-
-    @Column(name = "cpu_sockets")
-    private Integer cpuSockets;
-
-    @Column(name = "cpus")
-    private Integer cpus;
-
-    @Column(name = "speed")
-    private Long speed;
-
-    @Column(name = "ram")
-    private long totalMemory;
-
-    @Column(name = "cluster_id")
-    private long clusterId;
-
-    @Column(name = "cluster_uuid")
-    private String clusterUuid;
-
-    @Column(name = "cluster_name")
-    private String clusterName;
-
     @Column(name = "cluster_type")
     @Enumerated(value = EnumType.STRING)
     Cluster.ClusterType clusterType;
-
+    @Id
+    @Column(name = "id")
+    private long id;
+    @Column(name = "uuid")
+    private String uuid;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "status")
+    private final Status status = null;
+    @Column(name = "type")
+    @Enumerated(value = EnumType.STRING)
+    private Type type;
+    @Column(name = "private_ip_address")
+    private String privateIpAddress;
+    @Column(name = "disconnected")
+    @Temporal(value = TemporalType.TIMESTAMP)
+    private Date disconnectedOn;
+    @Column(name = "version")
+    private String version;
+    @Column(name = "hypervisor_type")
+    @Enumerated(value = EnumType.STRING)
+    private HypervisorType hypervisorType;
+    @Column(name = "hypervisor_version")
+    private String hypervisorVersion;
+    @Column(name = "capabilities")
+    private String caps;
+    @Column(name = "last_ping")
+    private long lastPinged;
+    @Column(name = GenericDao.CREATED_COLUMN)
+    private Date created;
+    @Column(name = GenericDao.REMOVED_COLUMN)
+    private Date removed;
+    @Column(name = "resource_state")
+    @Enumerated(value = EnumType.STRING)
+    private ResourceState resourceState;
+    @Column(name = "mgmt_server_id")
+    private Long managementServerId;
+    @Column(name = "cpu_sockets")
+    private Integer cpuSockets;
+    @Column(name = "cpus")
+    private Integer cpus;
+    @Column(name = "speed")
+    private Long speed;
+    @Column(name = "ram")
+    private long totalMemory;
+    @Column(name = "cluster_id")
+    private long clusterId;
+    @Column(name = "cluster_uuid")
+    private String clusterUuid;
+    @Column(name = "cluster_name")
+    private String clusterName;
     @Column(name = "data_center_id")
     private long zoneId;
 
